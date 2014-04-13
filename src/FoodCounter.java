@@ -13,11 +13,6 @@ class Counter extends Thread
 	public void add(Customer customer) {
 		customer.setArrivalTime(this.time);
 		queue.add(customer);
-		Collections.sort(queue, new Comparator<Customer>() {
-			@Override public int compare(Customer x, Customer y) {
-				return (int)(y.getArrivalTime() - x.getArrivalTime());
-			}
-		});
 	}
 
 }
@@ -42,7 +37,7 @@ class FoodCounter extends Counter
 			this.time = this.time + serviceTime;
 			servingCustomer.setTime(servingCustomer.getTime()+(this.time-servingCustomer.getArrivalTime()));
 			//System.out.println("Customer "+servingCustomer.getID()+" getting food at "+servingCustomer.getTime());
-			System.out.println("FoodCounter,"+servingCustomer.getID()+","+servingCustomer.getArrivalTime()+","+servingCustomer.getTime());
+			System.out.println(servingCustomer.getID()+",FoodCounter,"+servingCustomer.getArrivalTime()+","+servingCustomer.getTime());
 			if(Math.random()>0.5) {
 				beverages.add(servingCustomer);
 			}
@@ -73,7 +68,7 @@ class Beverages extends Counter
 				this.time = this.time + serviceTime;
 				servingCustomer.setTime(servingCustomer.getTime()+this.time);
 				//System.out.println("Customer "+servingCustomer.getID()+" getting beverage at "+servingCustomer.getTime());
-				System.out.println("Beverages,"+servingCustomer.getID()+","+servingCustomer.getArrivalTime()+","+servingCustomer.getTime());
+				System.out.println(servingCustomer.getID()+",Beverages,"+servingCustomer.getArrivalTime()+","+servingCustomer.getTime());
 				cashier.add(servingCustomer);
 			}
 		}

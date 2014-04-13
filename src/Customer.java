@@ -12,7 +12,7 @@ class Customer {
 		this.createdTime = currentTime;
 		this.time = this.createdTime;
 		//System.out.println("Customer "+getID()+" entered queue at "+this.createdTime);
-		System.out.println("Enqueue,"+this.getID()+","+this.getCreatedTime()+",,");
+		System.out.println(this.getID()+",Enqueue,"+this.getCreatedTime()+",,");
 	}
 
 	public double getTime() {

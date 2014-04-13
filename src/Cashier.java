@@ -19,7 +19,7 @@ class Cashier extends Counter
 				this.time = this.time + serviceTime;
 				servingCustomer.setTime(servingCustomer.getTime()+(this.time-servingCustomer.getArrivalTime()));
 				//System.out.println("Customer "+servingCustomer.getID()+" left cashier at "+servingCustomer.getTime()+", total spent time is "+(servingCustomer.getTime()-servingCustomer.getCreatedTime()));
-				System.out.println("Cashier,"+servingCustomer.getID()+","+servingCustomer.getArrivalTime()+","+servingCustomer.getTime());
+				System.out.println(servingCustomer.getID()+",Cashier,"+servingCustomer.getArrivalTime()+","+servingCustomer.getTime());
 			}
 		}
 	}
