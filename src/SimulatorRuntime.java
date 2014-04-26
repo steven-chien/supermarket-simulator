@@ -5,14 +5,15 @@ class SimulatorRuntime
 {
 	public static void main(String[] args) {
 
-		Simulator simulator = new Simulator(args[0], Integer.parseInt(args[1]));
+		Event simulatorStart = new SimulatorStartEvent(0.0);
+		Simulator simulator = new Simulator(simulatorStart);
 		Cashier cashier = new Cashier();
-		Generator generator = new Generator();
-		Customer customer = new Customer(0.0);
-
-		simulator.addCustomer(customer);
-		simulator.addListener(generator);
+		DeliveryService delivery = new DeliveryService();
+		Generator customerGenerator = new Generator();
+		
+		simulator.addListener(customerGenerator);
 		simulator.addListener(cashier);
+		simulator.addListener(delivery);
 
 		simulator.start();
 	}

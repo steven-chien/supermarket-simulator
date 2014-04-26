@@ -1,4 +1,4 @@
-abstract class Listener
+public interface Listener
 {
-	abstract void execute(Simulator simulator, Customer customer);
+	void execute(Simulator simulator, Event event);
 }

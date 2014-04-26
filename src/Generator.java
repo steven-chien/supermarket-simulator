@@ -1,14 +1,15 @@
 import java.util.*;
 import java.io.*;
 
-class Generator extends Listener
+class Generator implements Listener
 {
-	public void execute(Simulator simulator, Customer customer) {
-		if(simulator.getCurrentTime()<simulator.getCustomerSize()) {
-			double currentTime = simulator.getCurrentTime();
-			//System.out.println("new customer time "+currentTime);
-			Customer newCustomer = new Customer(currentTime);
-			simulator.addCustomer(newCustomer);
+	public void execute(Simulator simulator, Event event) {
+		if(simulator.getTime()<10 && (event instanceof SimulatorStartEvent || event instanceof GenerateCustomerEvent)) {
+			double currentTime = simulator.getTime();
+			Customer customer;
+			double randomVariable = Math.random();
+			simulator.addEvent(new EnQueueEvent(currentTime+randomVariable,new Customer(simulator.getTime()+randomVariable)));
+			simulator.addEvent(new GenerateCustomerEvent(currentTime+randomVariable));
 		}
 	}
 }

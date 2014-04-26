@@ -1,24 +1,17 @@
 import java.util.*;
 import java.io.*;
 
-class Cashier extends Listener
+class Cashier implements Listener
 {
 	PointOfSales pos = new PointOfSales();
 
-	public void execute(Simulator simulator, Customer customer) {
-		try {
-			FileWriter fw = new FileWriter(simulator.getFfileName(),true);
-
-			double currentTime = simulator.getCurrentTime();
+	public void execute(Simulator simulator, Event event) {
+		if(event instanceof EnQueueEvent) {
+			double currentTime = simulator.getTime();
+			Customer customer = event.customer;
 			customer.serviceTime = pos.newTransaction(currentTime);
-			customer.queuingTime = currentTime - customer.enQueueTime;
-			customer.deQueueTime = currentTime + customer.serviceTime;
-			simulator.updateCurrentTime(customer.deQueueTime);
-			fw.write(customer+"\n");
-			fw.close();
-		}
-		catch(IOException e) {
-			System.err.println("IOException: " + e.getMessage());
+			customer.deQueueTime = customer.serviceTime + customer.enQueueTime;
+			simulator.addEvent(new DeQueueEvent(customer.deQueueTime, customer));
 		}
 	}
 }

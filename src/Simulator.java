@@ -3,66 +3,45 @@ import java.io.*;
 
 class Simulator
 {
-	private Queue<Customer> customerQueue;
+	private Queue<Event> eventQueue = new PriorityQueue<Event>(10, new Comparator<Event>() {
+		@Override public int compare(Event e1, Event e2) {
+			return (int)(e2.timestamp - e1.timestamp);
+		}
+	});
 	private ArrayList<Listener> listeners = new ArrayList<Listener>();
-	/* declare servers */
 	private double time = 0.0;
-	private Customer currentCustomer;
-	private String fileName;
-	private int customerSize;
-	
-	public Simulator(String fileName, int size) {
-		customerQueue = new PriorityQueue<Customer>(size, new Comparator<Customer>() {
-			@Override public int compare(Customer c1, Customer c2) {
-				return (int)(c1.enQueueTime - c2.enQueueTime);
-			}
-		});
-		this.customerSize = size;
-		this.fileName = fileName;
 
-		try {
-			FileWriter fw = new FileWriter(fileName,false);
-			fw.write("Enqueue Time,Queuing Time,Service Time,Dequeue Time\n");
-			fw.close();            
-		}
-		catch(IOException e) {
-			System.err.println("IOException: " + e.getMessage());
-		}
-
+	public Simulator(Event event) {
+		//insert first event
+		this.addEvent(event);
 	}
 
-	public int getCustomerSize() {
-		return customerSize;
-	}
-
-	public String getFfileName() {
-		return this.fileName;
-	}
-
-	public void addCustomer(Customer customer) {
-		customerQueue.add(customer);
-		/* sort the queue here */
+	public void addEvent(Event event) {
+		this.time = event.timestamp;
+		eventQueue.add(event);
 	}
 
 	public void addListener(Listener listener) {
 		listeners.add(listener);
 	}
 
-	public double getCurrentTime() {
+	public double getTime() {
 		return this.time;
 	}
 
-	public void updateCurrentTime(double time) {
+	public void setTime(double time) {
 		this.time = time;
 	}
-	
+
 	public void start() {
-		while(customerQueue.size()>0) {
-			currentCustomer = customerQueue.poll();
+		Event currentEvent;
+		while(eventQueue.size()>0) {
+			currentEvent = eventQueue.poll();
 			for(int i=0; i<listeners.size(); i++) {
-				listeners.get(i).execute(this, currentCustomer);
+				listeners.get(i).execute(this, currentEvent);
 			}
-			System.out.println("Current time = "+this.time);
+			System.out.println("Simulator: Current Time: "+time);
 		}
 	}
+
 }

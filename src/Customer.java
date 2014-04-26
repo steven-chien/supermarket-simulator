@@ -20,5 +20,5 @@ class Customer
 		return this.enQueueTime+","+this.queuingTime+","+this.serviceTime+","+this.deQueueTime;
 	}
 
-	public void execute() {}
+	//public void execute() {}
 }
