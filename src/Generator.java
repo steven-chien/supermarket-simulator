@@ -1,7 +1,7 @@
 import java.util.*;
 import java.io.*;
 
-class Generator implements Listener extends CustomerGenerator
+class Generator extends CustomerCreator implements Listener
 {
 	public void execute(Simulator simulator, Event event) {
 		if(simulator.getTime()<10 && (event instanceof SimulatorStartEvent || event instanceof GenerateCustomerEvent)) {

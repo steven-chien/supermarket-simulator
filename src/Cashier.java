@@ -11,7 +11,9 @@ class Cashier implements Listener
 			Customer customer = event.customer;
 			customer.serviceTime = pos.newTransaction(currentTime);
 			customer.deQueueTime = customer.serviceTime + customer.enQueueTime;
-			simulator.addEvent(new DeQueueEvent(customer.deQueueTime, customer));
+			Event left = new DeQueueEvent(customer.deQueueTime, customer);
+			simulator.setTime(customer.deQueueTime);
+			//simulator.addEvent(new DeQueueEvent(customer.deQueueTime, customer));
 		}
 	}
 }
