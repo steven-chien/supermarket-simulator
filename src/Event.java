@@ -1,6 +1,7 @@
 import java.io.*;
 import java.util.*;
 
+//general event
 class Event
 {
 	double timestamp;
@@ -20,6 +21,7 @@ class Event
 	}
 }
 
+//enqueue event
 class EnQueueEvent extends Event
 {
 	public EnQueueEvent(double timestamp, Customer customer) {
@@ -27,11 +29,13 @@ class EnQueueEvent extends Event
 		System.out.println(this);
 	}
 
+	//decorate
 	@Override public String toString() {
 		return super.toString()+"; customer enqueue";
 	}
 }
 
+//dequeue
 class DeQueueEvent extends Event
 {
 	public DeQueueEvent(double timestamp, Customer customer) {
@@ -40,11 +44,13 @@ class DeQueueEvent extends Event
 		System.out.println(this);
 	}
 
+	//decorate
 	@Override public String toString() {
 		return super.toString()+" customer dequeue; service = "+customer.serviceTime+"; enQueue = "+customer.enQueueTime;
 	}
 }
 
+//first event
 class SimulatorStartEvent extends GenerateCustomerEvent
 {
 	public SimulatorStartEvent(double timestamp) {
@@ -52,11 +58,13 @@ class SimulatorStartEvent extends GenerateCustomerEvent
 		System.out.println(this);
 	}
 
+	//decorate
 	@Override public String toString() {
 		return super.toString()+" Simulator starts!";
 	}
 }
 
+//generate new customer
 class GenerateCustomerEvent extends Event
 {
 	public GenerateCustomerEvent(double timestamp) {
@@ -65,6 +73,7 @@ class GenerateCustomerEvent extends Event
 		//this.customer = new Customer(timestamp);
 	}
 
+	//decorate
 	@Override public String toString() {
 		return super.toString()+" insert generator";
 	}

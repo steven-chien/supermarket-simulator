@@ -1,4 +1,5 @@
+//interface of listeners
 public interface Listener
 {
-	void execute(Simulator simulator, Event event);
+	abstract void execute(Simulator simulator, Event event);
 }
