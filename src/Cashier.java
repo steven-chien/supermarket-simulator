@@ -3,7 +3,7 @@ import java.io.*;
 
 class Cashier implements Listener
 {
-	PointOfSales pos = new PointOfSales();
+	private PointOfSales pos = new PointOfSales();
 
 	public void execute(Simulator simulator, Event event) {
 		//check if event is of correct type
