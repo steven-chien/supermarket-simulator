@@ -31,7 +31,7 @@ class EnQueueEvent extends Event
 
 	//decorate
 	@Override public String toString() {
-		return super.toString()+"; customer enqueue";
+		return super.toString() + " ready to serve a new customer";
 	}
 }
 
@@ -46,7 +46,7 @@ class DeQueueEvent extends Event
 
 	//decorate
 	@Override public String toString() {
-		return super.toString()+" customer dequeue; service = "+customer.serviceTime+"; enQueue = "+customer.enQueueTime;
+		return super.toString()+" a customer was served at "+customer.enQueueTime+" for "+customer.serviceTime+" and left at "+customer.deQueueTime;
 	}
 }
 
@@ -75,6 +75,6 @@ class GenerateCustomerEvent extends Event
 
 	//decorate
 	@Override public String toString() {
-		return super.toString()+" insert generator";
+		return super.toString()+" insert customer generator";
 	}
 }

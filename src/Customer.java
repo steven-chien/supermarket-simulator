@@ -14,6 +14,6 @@ class Customer
 	}
 
 	@Override public String toString() {
-		return this.enQueueTime+","+this.queuingTime+","+this.serviceTime+","+this.deQueueTime;
+		return "A customer started queuing at "+this.enQueueTime+" for "+this.queuingTime+" and was served for "+this.serviceTime+" and left at "+this.deQueueTime;
 	}
 }

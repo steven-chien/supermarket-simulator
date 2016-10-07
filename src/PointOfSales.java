@@ -12,7 +12,7 @@ class PointOfSales
 		this.transactionTime.add(time);
 		transactionCount++;
 
-		return Math.random();
+		return Math.random() * 5;
 	}
 
 	public int getTransactionCount() {
